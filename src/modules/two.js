@@ -4,9 +4,3 @@ const twoModule = () => {
 }
 
 export default twoModule
-// module.exports = twoModule
-
-// (() => {
-//   const title = "two";
-//   console.log(title);
-// })()

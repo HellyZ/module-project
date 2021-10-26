@@ -21,14 +21,30 @@ const timer = (deadline) => {
 
   const updateClock = () => {
     let getTime = getTimeRemaining();
-    
-    timerDays.textContent = getTime.days
-    timerHours.textContent = getTime.hours
-    timerMinutes.textContent = getTime.minutes
-    timerSeconds.textContent = getTime.seconds
+    let interval;
+    timerDays.textContent =
+      getTime.days.toString().length > 1 ? getTime.days : "0" + getTime.days;
+    timerHours.textContent =
+      getTime.hours.toString().length > 1 ? getTime.hours : "0" + getTime.hours;
+    timerMinutes.textContent =
+      getTime.minutes.toString().length > 1
+        ? getTime.minutes
+        : "0" + getTime.minutes;
+    timerSeconds.textContent =
+      getTime.seconds.toString().length > 1
+        ? getTime.seconds
+        : "0" + getTime.seconds;
 
     if (getTime.timeRemaining > 0) {
-      setTimeout(updateClock, 1000)
+      interval = setInterval(updateClock, 1000);
+    } else {
+      clearInterval(interval);
+      console.log("stop");
+      timerDays.textContent =
+        timerHours.textContent =
+        timerMinutes.textContent =
+        timerSeconds.textContent =
+          "00";
     }
   };
   updateClock();

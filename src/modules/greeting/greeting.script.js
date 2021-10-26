@@ -81,13 +81,12 @@ const newYearComes = () => {
   let date = new Date();
 
   let deadline = "January 1 " + (date.getFullYear() + 1) + " 00:00:00";
-  console.log(deadline);
 
   let setClock = function (newyear) {
     let timeinterval = setInterval(function () {
       let t = timeLeft(newyear);
 
-      newYearTimer.innerText = `До Нового Года осталось: ${t.days} дней ${t.hours} hours ${t.minutes} minutes ${t.seconds} sec`;
+      newYearTimer.innerText = `До Нового Года осталось: ${t.days} дней`;
       if (t.total <= 0) {
         clearInterval(timeinterval);
       }

@@ -17,16 +17,7 @@ const timer = (deadline) => {
     return { timeRemaining, days, hours, minutes, seconds };
   };
 
-  const twoSignsNumber = (number) => {
-    let tempNum = number.toString();
-    let result;
-    if (tempNum.length > 1) {
-      result = number;
-    } else {
-      result = `0${number}`;
-    }
-    return result;
-  };
+  const twoSignsNumber = number => number < 10 ? `0${number}` : number;
 
   const updateClock = () => {
     let getTime = getTimeRemaining();

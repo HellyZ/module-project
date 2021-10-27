@@ -17,21 +17,24 @@ const timer = (deadline) => {
     return { timeRemaining, days, hours, minutes, seconds };
   };
 
+  const twoSignsNumber = (number) => {
+    let tempNum = number.toString();
+    let result;
+    if (tempNum.length > 1) {
+      result = number;
+    } else {
+      result = `0${number}`;
+    }
+    return result;
+  };
+
   const updateClock = () => {
     let getTime = getTimeRemaining();
     let interval;
-    timerDays.textContent =
-      getTime.days.toString().length > 1 ? getTime.days : "0" + getTime.days;
-    timerHours.textContent =
-      getTime.hours.toString().length > 1 ? getTime.hours : "0" + getTime.hours;
-    timerMinutes.textContent =
-      getTime.minutes.toString().length > 1
-        ? getTime.minutes
-        : "0" + getTime.minutes;
-    timerSeconds.textContent =
-      getTime.seconds.toString().length > 1
-        ? getTime.seconds
-        : "0" + getTime.seconds;
+    timerDays.textContent = twoSignsNumber(getTime.days);
+    timerHours.textContent = twoSignsNumber(getTime.hours);
+    timerMinutes.textContent = twoSignsNumber(getTime.minutes);
+    timerSeconds.textContent = twoSignsNumber(getTime.seconds);
 
     if (getTime.timeRemaining > 0) {
       interval = setInterval(updateClock, 1000);

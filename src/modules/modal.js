@@ -53,4 +53,4 @@ const modal = () => {
   closeBtn.addEventListener("click", handleModal, false);
 };
 
-export default modal;
+module.exports = modal;

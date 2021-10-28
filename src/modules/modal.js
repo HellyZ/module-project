@@ -1,27 +1,27 @@
 function fadeIn(elem, speed) {
   if (!elem.style.opacity) {
     elem.style.opacity = 0;
-  } 
+  }
 
-  let inInterval = setInterval(function () {
-    elem.style.opacity = Number(elem.style.opacity) + 0.02;
-    if (elem.style.opacity >= 1) clearInterval(inInterval);
+  let inInterval = setTimeout(function () {
+    elem.style.opacity = Number(elem.style.opacity) + 0.2;
+    if (elem.style.opacity >= 1) clearTimeout(inInterval);
   }, speed / 50);
-} 
+}
 
 function fadeOut(elem, speed) {
   if (!elem.style.opacity) {
     elem.style.opacity = 1;
-  } 
+  }
 
-  let inInterval = setInterval(function () {
-    elem.style.opacity = Number(elem.style.opacity) - 0.02;
+  let inInterval = setTimeout(function () {
+    elem.style.opacity = Number(elem.style.opacity) - 0.2;
     if (elem.style.opacity <= 0) {
-      clearInterval(inInterval);
+      clearTimeout(inInterval);
       elem.style.display = "none";
     }
   }, speed / 50);
-} 
+}
 
 const modal = () => {
   const btns = document.querySelectorAll(".popup-btn");

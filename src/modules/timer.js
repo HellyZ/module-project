@@ -48,4 +48,4 @@ const timer = (deadline) => {
   updateClock();
 };
 
-module.exports = timer;
+export default timer;

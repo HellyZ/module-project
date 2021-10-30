@@ -1,32 +1,33 @@
-function fadeIn(elem, speed) {
-  if (!elem.style.opacity) {
-    elem.style.opacity = 0;
-  }
-
-  let inInterval = setTimeout(function () {
-    elem.style.opacity = Number(elem.style.opacity) + 0.2;
-    if (elem.style.opacity >= 1) clearTimeout(inInterval);
-  }, speed / 50);
-}
-
-function fadeOut(elem, speed) {
-  if (!elem.style.opacity) {
-    elem.style.opacity = 1;
-  }
-
-  let inInterval = setTimeout(function () {
-    elem.style.opacity = Number(elem.style.opacity) - 0.2;
-    if (elem.style.opacity <= 0) {
-      clearTimeout(inInterval);
-      elem.style.display = "none";
-    }
-  }, speed / 50);
-}
 
 const modal = () => {
   const btns = document.querySelectorAll(".popup-btn");
   const modal = document.querySelector(".popup");
   const closeBtn = document.querySelector(".popup-close");
+  const fadeIn = (elem, speed) => {
+    if (!elem.style.opacity) {
+      elem.style.opacity = 0;
+    }
+  
+    let inInterval = setTimeout(function () {
+      elem.style.opacity = Number(elem.style.opacity) + 0.2;
+      if (elem.style.opacity >= 1) clearTimeout(inInterval);
+    }, speed / 50);
+  }
+  
+  const fadeOut = (elem, speed) => {
+    if (!elem.style.opacity) {
+      elem.style.opacity = 1;
+    }
+  
+    let inInterval = setTimeout(function () {
+      elem.style.opacity = Number(elem.style.opacity) - 0.2;
+      if (elem.style.opacity <= 0) {
+        clearTimeout(inInterval);
+        elem.style.display = "none";
+      }
+    }, speed / 50);
+  }
+  
   const handleModal = () => {
     if (modal.style.display == "block") {
       fadeOut(modal, 500);
@@ -53,4 +54,4 @@ const modal = () => {
   closeBtn.addEventListener("click", handleModal, false);
 };
 
-module.exports = modal;
+export default modal;

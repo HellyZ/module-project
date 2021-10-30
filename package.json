@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "swiper": "^7.2.0"
+  },
   "devDependencies": {
     "webpack": "^5.59.1",
     "webpack-cli": "^4.9.1"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch --mode=development",
+    "start": "webpack serve --open --mode=development"
   },
   "author": "",
   "license": "ISC"

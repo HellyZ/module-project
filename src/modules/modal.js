@@ -1,57 +1,53 @@
+const fadeIn = (elem, speed) => {
+  let frameId = requestAnimationFrame(() => fadeIn(elem));
+  elem.style.display = "block";
+  elem.style.opacity = Number(elem.style.opacity) + 0.1;
+  if (elem.style.opacity >= 1) {
+    cancelAnimationFrame(frameId);
+  }
+};
 
-const modal = () => {
+const fadeOut = (elem, speed) => {
+  let frameId = requestAnimationFrame(() => fadeOut(elem));
+  elem.style.opacity = Number(elem.style.opacity) - 0.1;
+  if (elem.style.opacity <= 0) {
+    elem.style.display = "none";
+    cancelAnimationFrame(frameId);
+  }
+};
+
+const RequestModal = () => {
+  const modalElement = document.querySelector(".popup");
+  if (!modalElement.style.opacity) {
+    modalElement.style.opacity = 0;
+  }
+
   const btns = document.querySelectorAll(".popup-btn");
-  const modal = document.querySelector(".popup");
   const closeBtn = document.querySelector(".popup-close");
-  const fadeIn = (elem, speed) => {
-    if (!elem.style.opacity) {
-      elem.style.opacity = 0;
-    }
-  
-    let inInterval = setTimeout(function () {
-      elem.style.opacity = Number(elem.style.opacity) + 0.2;
-      if (elem.style.opacity >= 1) clearTimeout(inInterval);
-    }, speed / 50);
-  }
-  
-  const fadeOut = (elem, speed) => {
-    if (!elem.style.opacity) {
-      elem.style.opacity = 1;
-    }
-  
-    let inInterval = setTimeout(function () {
-      elem.style.opacity = Number(elem.style.opacity) - 0.2;
-      if (elem.style.opacity <= 0) {
-        clearTimeout(inInterval);
-        elem.style.display = "none";
-      }
-    }, speed / 50);
-  }
-  
-  const handleModal = () => {
-    if (modal.style.display == "block") {
-      fadeOut(modal, 500);
+
+  const toggleModal = (event) => {
+    if (modalElement.style.display == "block") {
+      fadeOut(modalElement, 10);
     } else {
-      modal.style.display = "block";
-      fadeIn(modal, 500);
+      fadeIn(modalElement, 10);
     }
   };
   const renderModal = (btns) => {
     let width = document.documentElement.clientWidth;
     if (width < 768) {
       btns.forEach((btn) => {
-        btn.removeEventListener("click", handleModal, false);
+        btn.removeEventListener("click", toggleModal, false);
       });
     } else {
       btns.forEach((btn) => {
-        btn.addEventListener("click", handleModal);
+        btn.addEventListener("click", toggleModal);
       });
     }
   };
 
   window.addEventListener("load", () => renderModal(btns), false);
   window.addEventListener("resize", () => renderModal(btns), false);
-  closeBtn.addEventListener("click", handleModal, false);
+  closeBtn.addEventListener("click", toggleModal, false);
 };
 
-export default modal;
+export default RequestModal;

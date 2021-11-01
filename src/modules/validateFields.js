@@ -2,6 +2,10 @@ const handleValidation = (event) => {
   const form1Inputs = document.querySelectorAll("#form1 input");
   const form2Inputs = document.querySelectorAll("#form2 input");
   const form3Inputs = document.querySelectorAll("#form3 input");
+  const rx = new RegExp("([^" + "\\w\\u0400-\\u04FF" + "]|^)([" + "\\w\\u0400-\\u04FF" + "])", "g");
+  const capitalize = (elem) => elem.toLowerCase().replace(rx, function($0, $1, $2){ 
+    return $1+$2.toUpperCase();
+});
 
   document.querySelectorAll('*[id^="form"]').forEach((formEl) =>
     formEl.addEventListener("submit", (event) => {
@@ -51,6 +55,7 @@ const handleValidation = (event) => {
           return match[0];
         })
         .replace(/[^0-9а-яА-Я- ]/g, "");
+        field.value = capitalize(field.value)
 
       if (pattern.test(field.value)) {
         console.log("user_message: true");
@@ -95,7 +100,8 @@ const handleValidation = (event) => {
           return match[0];
         })
         .replace(/[^0-9а-яА-Я- ]/g, "");
-
+      field.value = capitalize(field.value)
+      
       if (pattern.test(field.value)) {
         console.log("user_name: true");
         return {

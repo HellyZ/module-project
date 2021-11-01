@@ -1,7 +1,6 @@
 import Swiper from "swiper";
 
 const sliderSwiper = () => {
-  console.log("sliderSwiper");
   const slider = new Swiper(".swiper", {
     centeredSlides: true,
     slidesPerView: 3,

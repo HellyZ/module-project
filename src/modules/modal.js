@@ -23,7 +23,6 @@ const RequestModal = () => {
   }
 
   const btns = document.querySelectorAll(".popup-btn");
-  const closeBtn = document.querySelector(".popup-close");
 
   const toggleModal = (event) => {
     if (modalElement.style.display == "block") {
@@ -47,7 +46,11 @@ const RequestModal = () => {
 
   window.addEventListener("load", () => renderModal(btns), false);
   window.addEventListener("resize", () => renderModal(btns), false);
-  closeBtn.addEventListener("click", toggleModal, false);
+  modalElement.addEventListener("click", (e) => {
+    if (!(e.target.closest(".popup-content")) || e.target.classList.contains('popup-close')){
+      fadeOut(modalElement, 10);
+    }
+  })
 };
 
 export default RequestModal;

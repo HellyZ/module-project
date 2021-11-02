@@ -5,6 +5,7 @@ import handleValidation from "./modules/validateFields";
 import sliderSwiper from "./modules/sliderSwiper";
 import Tabs from "./modules/tabs";
 import slider from "./modules/slider";
+// import sliderParams from "./modules/sliderParams";
 
 timer("04 november 2021");
 menu();
@@ -14,3 +15,4 @@ sliderSwiper();
 handleValidation();
 Tabs();
 slider();
+// sliderParams(".portfolio-content", ".portfolio-item");

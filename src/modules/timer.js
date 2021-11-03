@@ -3,6 +3,7 @@ const timer = (deadline) => {
   const timerHours = document.getElementById("timer-hours");
   const timerMinutes = document.getElementById("timer-minutes");
   const timerSeconds = document.getElementById("timer-seconds");
+  let interval;
 
   const getTimeRemaining = () => {
     let dateStop = new Date(deadline).getTime();
@@ -17,9 +18,7 @@ const timer = (deadline) => {
     return { timeRemaining, days, hours, minutes, seconds };
   };
 
-  const updateClock = () => {
-    let getTime = getTimeRemaining();
-    let interval;
+  const updateClock = (getTime) => {
     timerDays.textContent =
       getTime.days.toString().length > 1 ? getTime.days : "0" + getTime.days;
     timerHours.textContent =
@@ -32,20 +31,24 @@ const timer = (deadline) => {
       getTime.seconds.toString().length > 1
         ? getTime.seconds
         : "0" + getTime.seconds;
-
-    if (getTime.timeRemaining > 0) {
-      interval = setInterval(updateClock, 1000);
-    } else {
-      clearInterval(interval);
-      console.log("stop");
-      timerDays.textContent =
-        timerHours.textContent =
-        timerMinutes.textContent =
-        timerSeconds.textContent =
-          "00";
-    }
   };
-  updateClock();
+  let loadTime = getTimeRemaining();
+
+  if (loadTime.timeRemaining > 0) {
+    console.log("> 0");
+    interval = setInterval(() => {
+      updateClock(loadTime);
+      loadTime = getTimeRemaining()
+    }, 1000)
+  } else {
+    clearInterval(interval);
+    console.log("stop");
+    timerDays.textContent =
+      timerHours.textContent =
+      timerMinutes.textContent =
+      timerSeconds.textContent =
+        "00";
+  }
 };
 
 export default timer;

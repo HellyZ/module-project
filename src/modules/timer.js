@@ -35,14 +35,12 @@ const timer = (deadline) => {
   let loadTime = getTimeRemaining();
 
   if (loadTime.timeRemaining > 0) {
-    console.log("> 0");
     interval = setInterval(() => {
       updateClock(loadTime);
       loadTime = getTimeRemaining()
     }, 1000)
   } else {
     clearInterval(interval);
-    console.log("stop");
     timerDays.textContent =
       timerHours.textContent =
       timerMinutes.textContent =

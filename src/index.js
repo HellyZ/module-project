@@ -7,7 +7,7 @@ import Tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
 
-timer("04 november 2021");
+timer("12 november 2021");
 menu();
 RequestModal();
 sliderSwiper();

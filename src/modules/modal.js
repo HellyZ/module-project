@@ -1,20 +1,4 @@
-const fadeIn = (elem, speed) => {
-  let frameId = requestAnimationFrame(() => fadeIn(elem));
-  elem.style.display = "block";
-  elem.style.opacity = Number(elem.style.opacity) + 0.1;
-  if (elem.style.opacity >= 1) {
-    cancelAnimationFrame(frameId);
-  }
-};
-
-const fadeOut = (elem, speed) => {
-  let frameId = requestAnimationFrame(() => fadeOut(elem));
-  elem.style.opacity = Number(elem.style.opacity) - 0.1;
-  if (elem.style.opacity <= 0) {
-    elem.style.display = "none";
-    cancelAnimationFrame(frameId);
-  }
-};
+import { animate } from "./helpers";
 
 const RequestModal = () => {
   const modalElement = document.querySelector(".popup");
@@ -26,13 +10,34 @@ const RequestModal = () => {
 
   const toggleModal = (event) => {
     if (modalElement.style.display == "block") {
-      fadeOut(modalElement, 10);
+      animate({
+        duration: 100,
+        timing(timeFraction) {
+          return 1 - timeFraction;
+        },
+        draw(progress) {
+          modalElement.style.opacity = progress * 100 + "%";
+          if (modalElement.style.opacity <= 0) {
+            modalElement.style.display = "none";
+          }
+        },
+      });
     } else {
-      fadeIn(modalElement, 10);
+      modalElement.style.display = "block";
+      animate({
+        duration: 100,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          modalElement.style.opacity = progress * 100 + "%";
+        },
+      });
     }
   };
   const renderModal = (btns) => {
     let width = document.documentElement.clientWidth;
+    modalElement.style.display = "none";
     if (width < 768) {
       btns.forEach((btn) => {
         btn.removeEventListener("click", toggleModal, false);
@@ -44,13 +49,9 @@ const RequestModal = () => {
     }
   };
 
+  const closeModalBtn = document.querySelector(".popup-close");
+  closeModalBtn.addEventListener("click", toggleModal);
   window.addEventListener("load", () => renderModal(btns), false);
   window.addEventListener("resize", () => renderModal(btns), false);
-  modalElement.addEventListener("click", (e) => {
-    if (!(e.target.closest(".popup-content")) || e.target.classList.contains('popup-close')){
-      fadeOut(modalElement, 10);
-    }
-  })
 };
-
 export default RequestModal;

@@ -1,44 +1,23 @@
+import { animate } from "./helpers";
+
 const calc = (price = 100) => {
   const calcBlock = document.querySelector(".calc-block");
   const calcType = document.querySelector(".calc-type");
   const calcSquare = document.querySelector(".calc-square");
   const calcCount = document.querySelector(".calc-count");
   const calcDay = document.querySelector(".calc-day");
-  let interval;
-  const animateTotalCount = (num, elem) => {
 
-    let k = 1;
-    let step = 1;
-    switch (true){
-      case num < 1000: 
-        k = 50;
-        step = k
-        break;
-      case num < 1500:  
-        k = 100; 
-        step = 2 * k
-        break;
-      case num < 2500:  
-        k = 200; 
-        step = 3 * k
-        break;
-      case num >= 2500:  
-        k = 1000; 
-        step = 5 * k
-        break;
-    }
-    const time = 200;
-    
-    let e = document.querySelector(elem);
-    let n = 0;
-    let t = Math.round(time / (num / step));
-    interval = setInterval(() => {
-      n = n + step;
-      if (n == num) {
-        clearInterval(interval);
-      }
-      e.innerHTML = n;
-    }, t);
+  const animateTotalCount = (num, elem) => {
+    let dur = 1500; 
+    animate({
+      duration: dur,
+      timing(timeFraction) {
+        return timeFraction;
+      },
+      draw(progress) {
+        elem.innerHTML = Math.floor(progress * num);
+      },
+    });
   };
 
   const countCalc = () => {
@@ -71,8 +50,9 @@ const calc = (price = 100) => {
   calcBlock.addEventListener("input", (e) => {
     let res = countCalc();
     if (res > 0) {
-      clearInterval(interval);
-      animateTotalCount(res, "#total");
+      let e = document.querySelector("#total");
+      e.innerHTML = 0;
+      animateTotalCount(res, e);
     }
   });
 };

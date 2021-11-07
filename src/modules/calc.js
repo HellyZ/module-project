@@ -7,8 +7,28 @@ const calc = (price = 100) => {
   let interval;
   const animateTotalCount = (num, elem) => {
 
+    let k = 1;
+    let step = 1;
+    switch (true){
+      case num < 1000: 
+        k = 50;
+        step = k
+        break;
+      case num < 1500:  
+        k = 100; 
+        step = 2 * k
+        break;
+      case num < 2500:  
+        k = 200; 
+        step = 3 * k
+        break;
+      case num >= 2500:  
+        k = 1000; 
+        step = 5 * k
+        break;
+    }
     const time = 200;
-    const step = 5;
+    
     let e = document.querySelector(elem);
     let n = 0;
     let t = Math.round(time / (num / step));

@@ -8,7 +8,7 @@ const calc = (price = 100) => {
   const calcDay = document.querySelector(".calc-day");
 
   const animateTotalCount = (num, elem) => {
-    let dur = 1500; 
+    let dur = 500;
     animate({
       duration: dur,
       timing(timeFraction) {

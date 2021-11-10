@@ -1,6 +1,8 @@
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
   const statusBlock = document.createElement("div");
+  statusBlock.classList.add("text-primary");
+  const spinnerLoader = document.createElement("div");
   const loadText = "Загрузка...";
   const errorText = "Ошибка...";
   const successText = "Спасибо! Наш менеджер с вами свяжется.";
@@ -8,11 +10,8 @@ const sendForm = ({ formId, someElem = [] }) => {
   const validate = (list) => {
     let success = true;
     list.forEach((el) => {
-      console.log(el.name);
-      console.log(el.value);
       try {
         let testData = el.value;
-        console.log(testData);
         if (el.name == "user_name") {
           let name_Regexp = new RegExp(/([а-яА-Я ]+)/gu);
           if (!name_Regexp.test(testData)) {
@@ -58,9 +57,11 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formElements = form.querySelectorAll("input");
     const formData = new FormData(form);
     const formBody = {};
-
+    spinnerLoader.classList.add("spinner-border");
+    spinnerLoader.classList.add("text-primary");
     statusBlock.textContent = loadText;
     form.append(statusBlock);
+    form.append(spinnerLoader);
 
     formData.forEach((val, key) => {
       formBody[key] = val;
@@ -76,11 +77,11 @@ const sendForm = ({ formId, someElem = [] }) => {
       }
     });
 
-    console.log("submit");
-
     if (validate(formElements)) {
       sendData(formBody)
         .then((data) => {
+          spinnerLoader.classList.remove("spinner-border");
+          spinnerLoader.classList.remove("text-primary");
           statusBlock.textContent = successText;
 
           formElements.forEach((input) => {
@@ -88,10 +89,12 @@ const sendForm = ({ formId, someElem = [] }) => {
           });
         })
         .catch((error) => {
+          spinnerLoader.classList.remove("spinner-border");
+          spinnerLoader.classList.remove("text-primary");
           statusBlock.textContent = errorText;
         });
     } else {
-      console.log("Данные не валидны");
+      console.error("Данные не валидны");
     }
   };
 

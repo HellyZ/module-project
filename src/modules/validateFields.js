@@ -28,6 +28,7 @@ const handleValidation = (event) => {
         .replace(/[ \^!#$%&]/g, "");
 
       if (pattern.test(field.value)) {
+        field.classList.add("success")
         return {
           isInputValid: true,
           errorMessage: "",
@@ -51,6 +52,7 @@ const handleValidation = (event) => {
         .replace(/[^0-9а-яА-Я- ]/g, "");
 
       if (pattern.test(field.value)) {
+        field.classList.add("success")
         return {
           isInputValid: true,
           errorMessage: "",
@@ -71,6 +73,7 @@ const handleValidation = (event) => {
         .replace(/[^0-9\-\(\)]/g, "");
 
       if (pattern.test(field.value)) {
+        field.classList.add("success")
         return {
           isInputValid: true,
           errorMessage: "",
@@ -91,6 +94,7 @@ const handleValidation = (event) => {
         .replace(/[^0-9а-яА-Я- ]/g, "");
 
       if (pattern.test(field.value)) {
+        field.classList.add("success")
         return {
           isInputValid: true,
           errorMessage: "",

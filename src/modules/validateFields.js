@@ -28,13 +28,11 @@ const handleValidation = (event) => {
         .replace(/[ \^!#$%&]/g, "");
 
       if (pattern.test(field.value)) {
-        console.log("user_email: true");
         return {
           isInputValid: true,
           errorMessage: "",
         };
       } else {
-        console.log("user_email: false");
         event.preventDefault();
         return {
           isInputValid: false,
@@ -53,13 +51,11 @@ const handleValidation = (event) => {
         .replace(/[^0-9а-яА-Я- ]/g, "");
 
       if (pattern.test(field.value)) {
-        console.log("user_message: true");
         return {
           isInputValid: true,
           errorMessage: "",
         };
       } else {
-        console.log("user_message: false");
         event.preventDefault();
         return {
           isInputValid: false,
@@ -75,13 +71,11 @@ const handleValidation = (event) => {
         .replace(/[^0-9\-\(\)]/g, "");
 
       if (pattern.test(field.value)) {
-        console.log("user_phone: true");
         return {
           isInputValid: true,
           errorMessage: "",
         };
       } else {
-        console.log("user_phone: true");
         event.preventDefault();
         return {
           isInputValid: false,
@@ -97,13 +91,11 @@ const handleValidation = (event) => {
         .replace(/[^0-9а-яА-Я- ]/g, "");
 
       if (pattern.test(field.value)) {
-        console.log("user_name: true");
         return {
           isInputValid: true,
           errorMessage: "",
         };
       } else {
-        console.log("user_name: false");
         event.preventDefault();
         return {
           isInputValid: false,

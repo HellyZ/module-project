@@ -6,6 +6,7 @@ import sliderSwiper from "./modules/sliderSwiper";
 import Tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
+import sendForm from "./modules/sendForm";
 
 timer("12 november 2021");
 menu();
@@ -16,3 +17,30 @@ handleValidation();
 Tabs();
 slider();
 calc();
+sendForm({
+  formId: "form1",
+  someElem: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
+sendForm({
+  formId: "form2",
+  someElem: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
+sendForm({
+  formId: "form3",
+  someElem: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});

@@ -53,10 +53,8 @@ const slider = () => {
     prevSlide(slides, currentSlide, "portfolio-item-active");
     prevSlide(dots, currentSlide, "dot-active");
     if (e.target.matches("#arrow-right")) {
-      console.log("arrow-right");
       currentSlide++;
     } else if (e.target.matches("#arrow-left")) {
-      console.log("arrow-left");
       currentSlide--;
     } else if (e.target.classList.contains("dot")) {
       dots.forEach((dot, index) => {

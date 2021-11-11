@@ -7,42 +7,6 @@ const sendForm = ({ formId, someElem = [] }) => {
   const errorText = "Ошибка...";
   const successText = "Спасибо! Наш менеджер с вами свяжется.";
 
-  const validate = (list) => {
-    let success = true;
-    list.forEach((el) => {
-      try {
-        let testData = el.value;
-        if (el.name == "user_name") {
-          let name_Regexp = new RegExp(/([а-яА-Я ]+)/gu);
-          if (!name_Regexp.test(testData)) {
-            success = false;
-            console.error("Имя введено неверно!");
-            statusBlock.textContent = errorText;
-          }
-        } else if (el.name == "user_phone") {
-          let phone_Regexp = new RegExp(
-            /^[\+]?[(]?[0-9]{3}[)]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
-          );
-          if (!phone_Regexp.test(testData)) {
-            success = false;
-            console.error("Номер введен неверно!");
-            statusBlock.textContent = errorText;
-          }
-        } else if (el.name == "user_message") {
-          let message_Regexp = new RegExp(/([а-яА-Я\d.,?!"-]+)/gu);
-          if (!message_Regexp.test(testData)) {
-            success = false;
-            console.error("Сообщение введено неверно");
-            statusBlock.textContent = errorText;
-          }
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-    });
-    return success;
-  };
-
   const sendData = (data) => {
     return fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
@@ -77,25 +41,21 @@ const sendForm = ({ formId, someElem = [] }) => {
       }
     });
 
-    if (validate(formElements)) {
-      sendData(formBody)
-        .then((data) => {
-          spinnerLoader.classList.remove("spinner-border");
-          spinnerLoader.classList.remove("text-primary");
-          statusBlock.textContent = successText;
+    sendData(formBody)
+      .then((data) => {
+        spinnerLoader.classList.remove("spinner-border");
+        spinnerLoader.classList.remove("text-primary");
+        statusBlock.textContent = successText;
 
-          formElements.forEach((input) => {
-            input.value = "";
-          });
-        })
-        .catch((error) => {
-          spinnerLoader.classList.remove("spinner-border");
-          spinnerLoader.classList.remove("text-primary");
-          statusBlock.textContent = errorText;
+        formElements.forEach((input) => {
+          input.value = "";
         });
-    } else {
-      console.error("Данные не валидны");
-    }
+      })
+      .catch((error) => {
+        spinnerLoader.classList.remove("spinner-border");
+        spinnerLoader.classList.remove("text-primary");
+        statusBlock.textContent = errorText;
+      });
   };
 
   try {

@@ -1,7 +1,17 @@
 const handleValidation = (event) => {
-  const form1Inputs = document.querySelectorAll("#form1 input");
-  const form2Inputs = document.querySelectorAll("#form2 input");
-  const form3Inputs = document.querySelectorAll("#form3 input");
+  const forms = document.querySelectorAll("form");
+  let inputs = [];
+  forms.forEach((el) => inputs.push(el.querySelectorAll("input")));
+  console.log("inputs", inputs);
+
+  function capitalize(string) {
+    return string
+      .split(/\s/)
+      .map(function (item) {
+        return item.charAt(0).toUpperCase() + item.slice(1);
+      })
+      .join(" ");
+  }
 
   const validateField = (event) => {
     let field = event.target;
@@ -41,16 +51,16 @@ const handleValidation = (event) => {
         }
       }
     } else if (field.name === "user_name") {
-      const reStr = "[a-zA-Z- ]+";
+      const reStr = "[а-яА-Я- ]+";
       if (field.value) {
         field.value = field.value
           .toLowerCase()
-          .replace(/([ \-])\1+/g, function (str, match) {
+          .replace(/([ \-])\1+/gu, function (str, match) {
             return match[0];
-          })
-          .replace(/\b\w/g, (c) => c.toUpperCase());
+          });
+        field.value = capitalize(field.value);
       }
-      if (new RegExp(`\\b${reStr}\\b`).test(field.value)) {
+      if (new RegExp(`\\b${reStr}\\b`, "u").test(field.value)) {
         field.setCustomValidity("");
       } else {
         field.setCustomValidity(
@@ -60,14 +70,10 @@ const handleValidation = (event) => {
     }
   };
 
-  form1Inputs.forEach((item) =>
-    item.addEventListener("blur", (event) => validateField(event))
-  );
-  form2Inputs.forEach((item) =>
-    item.addEventListener("blur", (event) => validateField(event))
-  );
-  form3Inputs.forEach((item) =>
-    item.addEventListener("blur", (event) => validateField(event))
+  inputs.forEach((item) =>
+    item.forEach((element) =>
+      element.addEventListener("blur", (event) => validateField(event))
+    )
   );
 };
 

@@ -8,7 +8,7 @@ import slider from "./modules/slider";
 import calc from "./modules/calc";
 import sendForm from "./modules/sendForm";
 
-timer("12 november 2021");
+timer("14 december 2021");
 menu();
 RequestModal();
 sliderSwiper();

@@ -11,7 +11,7 @@ const RequestModal = () => {
   const toggleModal = (event) => {
     if (modalElement.style.display == "block") {
       animate({
-        duration: 100,
+        duration: 150,
         timing(timeFraction) {
           return 1 - timeFraction;
         },
@@ -25,7 +25,7 @@ const RequestModal = () => {
     } else {
       modalElement.style.display = "block";
       animate({
-        duration: 100,
+        duration: 150,
         timing(timeFraction) {
           return timeFraction;
         },
@@ -38,14 +38,10 @@ const RequestModal = () => {
   const renderModal = (btns) => {
     let width = document.documentElement.clientWidth;
     modalElement.style.display = "none";
-    if (width < 768) {
-      btns.forEach((btn) => {
-        btn.removeEventListener("click", toggleModal, false);
-      });
-    } else {
+    if (width > 768) {
       btns.forEach((btn) => {
         btn.addEventListener("click", toggleModal);
-      });
+      })
     }
   };
 

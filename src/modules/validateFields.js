@@ -17,9 +17,13 @@ const validateField = (event) => {
     field.name === "user_message" &&
     field.placeholder === "Ваше сообщение"
   ) {
-    const reStr = "[а-яА-Я- ]";
     if (field.value) {
-      if (new RegExp(`\\b${reStr}\\b`).test(field.value)) {
+      if (
+        new RegExp(
+          /^[аАбБвВгГдДеЕёЁжЖзЗиИйЙкКлЛмМнНоОпПрРсСтТуУфФхХцЦчЧшШщЩъЪыЫьЬэЭюЮяЯ\- ]+$/,
+          "g"
+        ).test(field.value)
+      ) {
         field.setCustomValidity("");
       } else {
         field.setCustomValidity("Используйте только кирилицу");

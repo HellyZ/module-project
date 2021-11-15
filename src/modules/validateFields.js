@@ -39,9 +39,8 @@ const handleValidation = (event) => {
         }
       }
     } else if (field.name === "user_phone") {
-      const reStr = "[0-9+]{11,}$";
       if (field.value) {
-        if (new RegExp(`\\b${reStr}\\b`).test(field.value)) {
+        if (new RegExp(/\+[0-9]{11,}$/).test(field.value)) {
           field.setCustomValidity("");
         } else {
           field.setCustomValidity(
@@ -60,11 +59,11 @@ const handleValidation = (event) => {
           });
         field.value = capitalize(field.value);
       }
-      if (new RegExp(`\\b${reStr}\\b`, "u").test(field.value)) {
+      if (new RegExp(`${reStr}`, "u").test(field.value)) {
         field.setCustomValidity("");
       } else {
         field.setCustomValidity(
-          "только латиница в любом регистре, дефис и пробел."
+          "только кириллица в любом регистре, дефис и пробел."
         );
       }
     }

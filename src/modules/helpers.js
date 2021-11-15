@@ -13,4 +13,13 @@ const animate = ({ timing, draw, duration }) => {
   });
 };
 
-export { animate };
+function capitalize(string) {
+  return string
+    .split(/\s/)
+    .map(function (item) {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    })
+    .join(" ");
+}
+
+export { animate, capitalize };
